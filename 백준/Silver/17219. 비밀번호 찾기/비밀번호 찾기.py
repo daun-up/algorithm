@@ -9,4 +9,4 @@ for _ in range(n):
     dic[site] = ps
 
 for _ in range(m):
-    print(dic[input().rstrip()])
+    print(dic[input().strip()])
