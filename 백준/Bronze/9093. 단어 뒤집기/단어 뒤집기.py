@@ -1,9 +1,6 @@
-import sys
+t = int(input())
 
-N = int(sys.stdin.readline())
-
-for _ in range(N):
-    word = list(sys.stdin.readline().split())
-    
-    for j in word :
-        print(j[::-1], end=' ')
+for _ in range(t) :
+    data = list(input().split())
+    for i in data :
+        print(i[::-1], end=' ')
