@@ -1,13 +1,19 @@
-for _ in range(int(input())):
-    s = input()
+t = int(input())
 
+for _ in range(t) :
     stack = []
-    for c in s:
-        if c == "(":
-            stack.append(c)
-        elif c == ")":
-            if not stack or stack[-1] != "(":
-                stack.append(")")
+    data = input()
+    for i in data :
+        if i == '(' :
+            stack.append(i)
+        elif i == ')' :
+            if stack :
+                stack.pop()
+            else :
+                print("NO")
                 break
-            stack.pop()
-    print("YES" if not stack else "NO")
+    else :
+        if len(stack) == 0 :
+            print("YES")
+        else :
+            print("NO")
