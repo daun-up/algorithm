@@ -1,17 +1,21 @@
-# import sys
-# input = sys.stdin.readline()
+import sys
+from collections import deque
+input = sys.stdin.readline
 
-N, K = map(int,input().split()) 
-array = [i for i in range(1, N+1)] # 처음에 원에 앉아 있는 사람들
+n, k = map(int,input().split()) # 인원 수, k 번째 사람 제거
+people = deque()
+result = []
 
-answer = []
-idx = 0 # 제거되는 사람의 인덱스
+for i in range(1, n+1) :
+    people.append(i)
 
-for i in range(N) :
-    idx += K - 1
-    if (idx >= len(array)):
-        idx = idx % len(array)
-    answer.append(str(array.pop(idx)))
-# answer = list(map(int,answer))
+while people :
+    for _ in range(k-1) : # 여기가 이해 안 감
+        # k-1개 빼놓고 다시 뒤에 붙이고, k번째를 pop()
+        people.append(people.popleft())
     
-print("<", ", ".join(answer),">", sep="")
+    result.append(people.popleft())
+
+print(str(result).replace('[', '<').replace(']', '>'))
+
+    
