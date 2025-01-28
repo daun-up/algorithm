@@ -1,27 +1,40 @@
-def check(i, j, oper):
-    if oper == "<":
-        return i < j  # 부등호가 <일 때, i < j 인지 확인
-    else:
-        return i > j  # 부등호가 >일 때, i > j 인지 확인
+k = int(input())
+
+data = list(input().split())
+
+# 문자열의 index 와 부등호의 index 가 존재
+visited = [0] * 10
+answer = []
+
+def check (a, b, op) :
+    if op == "<" :
+        if a > b : return False
+    if op == ">" :
+        if a < b : return False
+    return True
+
+def dfs (idx, num) :
     
-def backtracking(idx, num):
-    if idx == k + 1:  # 숫자 k+1개를 모두 선택한 경우
-        answer.append(num)  # 정답 리스트에 숫자 저장
+    if idx == k + 1 :
+        answer.append(num)
         return
-    for i in range(10):  # 0부터 9까지 숫자 시도
-        if not used[i]:  # 해당 숫자가 아직 사용되지 않았으면
-            if idx == 0 or check(num[idx-1], str(i), oper[idx-1]):  # 부등호 조건을 만족하면
-                used[i] = True  # 해당 숫자를 사용 중으로 표시
-                backtracking(idx + 1, num + str(i))  # 다음 자리로 이동하여 재귀 호출
-                used[i] = False  # 해당 숫자 사용 완료 후 다시 미사용 상태로 되돌림
     
-k = int(input())  # 부등호의 개수 입력
-oper = list(input().split())  # 부등호 리스트 입력
+    for i in range(10) :
+        if not visited[i] :
+            if idx == 0 or check(num[idx-1], str(i), data[idx-1]) :
+                visited[i] = True
+                dfs(idx + 1, num + str(i))
+                visited[i] = False
+    
+    # 브루트포스
+    # 0~9 까지의 숫자를 부등호 사이사이에 넣을 수 있으므로 숫자를 하나씩 넣어본다
+    # 이때, 선택된 숫자는 모두 달라야 하므로 visited 배열을 만들어 이미 사용된 숫자인지를 체크한다. 
+    # 만약 사용되지 않은 숫자라면 부등호를 만족하는지 확인한다.
+    # 이때 index 가 0 이라면 비교할 필요가 없으므로 그냥 문자열에 넣는다.
+ 
+ 
+dfs(0, '')
+answer.sort()
 
-used = [False] * 10  # 숫자의 사용 여부를 기록하는 리스트
-answer = []  # 정답을 저장할 리스트
-backtracking(0, '')  # 백트래킹 시작
-
-answer.sort()  # 정답 리스트 정렬
-print(answer[-1])  # 가장 큰 숫자 출력
-print(answer[0])  # 가장 작은 숫자 출력
+print(answer[-1])
+print(answer[0])
