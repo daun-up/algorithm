@@ -1,29 +1,24 @@
-import sys
-input = sys.stdin.readline
-def bfs (start,end) :
-    # 큐, visited 배열, 필요 변수 생성
-    q = []
+def bfs (s,e) :
+    # 큐, v[], 필요 변수 생성
     v = [0] * 200001
-    
-    # 초기 데이터 삽입 및 visited 초기화
-    
-    q.append(start)
-    v[start] = 1
-    
-    while q :
-        current = q.pop(0)
-        for next in (current - 1, current + 1, current * 2) :
-            if 0 <= next <= 200000 and v[next] == 0 :
-                q.append(next)
-                v[next] = v[current] + 1
-        if current == end :
-            return v[end] - 1
-    # 이곳에 도달할 리는 없지만 
+    q = []
+    # 초기데이터 삽입, v[] 초기화
+    q.append(s)
+    v[s] = 1
+    while q:
+        c = q.pop(0)
+        if c == e :
+            return v[e] - 1
+        # 3 방향, 범위내 (0~200000), 미방문
+        for n in (c-1, c+1, c*2) :
+            if 0 <= n <= 200000 and v[n] == 0 :
+                q.append(n)
+                v[n] = v[c] + 1
+    # 이곳에 도달할 리는 없겠지만
     return -1
-                
-    
-n, k = map(int,input().split())
-answer = bfs(n, k)
-print(answer)
+        
 
-    
+
+N, K = map(int,input().split())
+ans = bfs(N, K)
+print(ans)
