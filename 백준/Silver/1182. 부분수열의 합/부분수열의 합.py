@@ -1,27 +1,29 @@
-# 크기가 양수인 부분 수열
-# 수열의 원소를 다 더한 값이 S 가 되는 경우의 수
-
-def dfs (n, sum, cnt) :
-    global answer # 함수 외부에 있는 변수를 함수 내에서 수정하려면 전역 변수임을 명시해줘야 함
-    if n == N : # 종료
-        if (sum == S and cnt > 0) :
-            answer += 1
-        return
-    # 하부 함수 호출
-    # 포함하는 경우
-    dfs(n + 1, sum + data[n], cnt + 1)
-    # 포함하지 않는 경우
-    dfs(n + 1, sum, cnt)
-
-N,S = map(int,input().split())
-
-
+n, s = map(int,input().split())
 data = list(map(int,input().split()))
 
+count = 0
 
-answer = 0
-
-dfs(0, 0, 0)
-print(answer)
+# depth : 현재 몇 번째 원소까지 탐색했는지를 나타내는 인덱스
+# total : 지금까지 선택한 원소들의 합
+def dfs (depth, total) : 
+    global count
+    if depth == n :
+        if total == s :
+            count += 1
+        return # 깊이가 n 이면 이미 다 돌아본 것이기 때문에 종료
     
-# print(dfs(0, 0, 0))
+    # 현재 원소를 포함하는 경우
+    dfs(depth + 1, total + data[depth])
+    
+    # 현재 원소를 포함하지 않는 경우
+    dfs(depth + 1, total)
+
+
+
+dfs(0,0)
+
+# 공집합도 total == 0으로 포함되므로, s == 0일 때는 1개 빼줌
+if s == 0:
+    count -= 1
+
+print(count)
