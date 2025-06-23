@@ -1,9 +1,8 @@
-e, s, m = map(int,input().split())
+e, s, m = map(int, input().split())
 
 year = 1
-
 while True :
-    if (year-e) % 15 == 0 and (year-s) % 28 == 0 and (year-m) % 19 == 0 :
+    if (year - 1) % 15 + 1 == e and (year - 1) % 28 + 1 == s and (year - 1) % 19 + 1 == m :
+        print(year)
         break
     year += 1
-print(year)
