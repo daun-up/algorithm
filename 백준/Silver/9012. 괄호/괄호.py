@@ -1,19 +1,21 @@
 t = int(input())
 
-for _ in range(t) :
+for i in range(t) :
     stack = []
+    
     data = input()
-    for i in data :
-        if i == '(' :
-            stack.append(i)
-        elif i == ')' :
-            if stack :
+    
+    for j in data :
+        if j == '(' :
+            stack.append(j)
+        elif j == ')' :
+            if len(stack) != 0 :
                 stack.pop()
             else :
                 print("NO")
                 break
     else :
-        if len(stack) == 0 :
+        if not stack :
             print("YES")
         else :
             print("NO")
