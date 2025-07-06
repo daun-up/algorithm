@@ -1,13 +1,13 @@
-import sys
-input = sys.stdin.readline
-
 n = int(input())
-p_list = list(map(int,input().split()))
-p_list.sort() # 최솟값을 찾기 위함
-sum = 0
+people = list(map(int,input().split()))
 
-for i in range(n):
-    for j in range(i+1):
-        sum += p_list[j]
+people.sort()
 
-print(sum)
+result = 0
+tmp = 0
+
+for time in people :
+    tmp += time
+    result += tmp
+
+print(result)
