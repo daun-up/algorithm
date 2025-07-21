@@ -1,12 +1,18 @@
+# 나이 순, 나이가 같으면 가입한 순
 n = int(input())
-list = []
 
-for i in range(n):
-    age, name = map(str,input().split())
-    age = int(age) # 형 변환
-    list.append((age, name))
+members = []
 
-list.sort(key= lambda x:x[0])
+for i in range(n) :
+    age, name = input().split()
+    
+    members.append((int(age), i, name))
+    
+members.sort(key=lambda x:(x[0], x[1]))
+# x[0] 은 나이
+# x[1] 은 입력 순서
+# 정렬 기준을 (나이, 입력순서) 튜플로 한다는 뜻
 
-for i in list :
-    print(i[0], i[1])
+for age, _, name in members :
+    print(age, name)
+
