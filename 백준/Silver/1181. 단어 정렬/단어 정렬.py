@@ -1,16 +1,11 @@
-import sys
-input = sys.stdin.readline
+n = int(input())
 
-n = int(input().rstrip()) 
-words = [] # 배열 만들어주기
+words = [input() for _ in range(n)]
 
-for i in range(n):
-    word = input().rstrip() # n 만큼 input 입력을 받고
-    words.append(word) # words 배열에 추가해줌
+words = list(set(words)) # 중복된 단어는 제거
 
-result = list(set(words)) # 중복 제거
-result.sort() # 같은 길이일 때 알파벳 정렬
-result.sort(key = len) # 길이로 정렬
+words.sort() # 사전 순으로 정렬
+words.sort(key=len) # 길이 순으로 정렬
 
-for j in result:
-    print(j)
+for i in words:
+    print(i)
