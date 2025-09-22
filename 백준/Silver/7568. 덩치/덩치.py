@@ -1,30 +1,14 @@
-import sys
-input = sys.stdin.readline
+n = int(input())
 
-n = int(input()) #전체 사람의 수
-info = []
-rank = []
+peoples = []
 
-for _ in range(n):
-    x,y = map(int,input().split())
-    info.append((x,y))
-
-for i in info:
+for _ in range(n) :
+    x, y = map(int,input().split())
+    peoples.append((x,y))
+    
+for i in peoples :
     rank = 1
-    for j in info:
-        if i[0] < j[0] and i[1] < j[1]:
+    for j in peoples :
+        if i[0] < j[0] and i[1] < j[1] :
             rank += 1
-
-    
-    print(rank,end=' ')
-
-
-
-
-
-
-
-    
-
-
- 
+    print(rank, end=" ")
