@@ -1,9 +1,10 @@
 def solution(x):
     answer = True
-    tmp = sum(map(int,str(x)))
+    ls = [int(i) for i in str(x)]
+    s = sum(ls)
     
-    if (x % tmp) == 0 :
+    if (x % s) == 0:
         answer = True
-    else :
+    else:
         answer = False
     return answer
