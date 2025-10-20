@@ -1,9 +1,10 @@
 def solution(arr, divisor):
     answer = []
-    for i in range(len(arr)) :
-        if arr[i] % divisor == 0 :
-            answer.append(arr[i])
-    if len(answer) == 0 :
+    for i in arr:
+        if i % divisor == 0: # 나누어 떨어질 때
+            answer.append(i)
+    if answer:
+        answer.sort() # 걍 이렇게 해야 하는 거임?
+    else:
         answer.append(-1)
-    answer = sorted(answer)
     return answer
