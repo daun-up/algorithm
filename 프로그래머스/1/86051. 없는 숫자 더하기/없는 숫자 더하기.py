@@ -1,6 +1,9 @@
 def solution(numbers):
     answer = 0
-    for i in range(0,10) :
-        if i not in numbers :
-                   answer += i
+    # numbers = numbers.sort()
+    
+    for n in range(10):
+        if n not in numbers:
+            answer += n
+    
     return answer
