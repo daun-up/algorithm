@@ -1,7 +1,7 @@
 def solution(a, b):
-    answer = 1234567890
-    tmp = 0
-    for i in range(len(a)) :
-        tmp += a[i]*b[i]
-    answer = tmp
-    return answer
+    # answer = [0]*len(a)
+    answer = []
+    for i in range(len(a)):
+        answer.append(a[i] * b[i])
+        # 만약 
+    return sum(answer)
