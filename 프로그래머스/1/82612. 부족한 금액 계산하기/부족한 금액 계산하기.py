@@ -1,7 +1,9 @@
 def solution(price, money, count):
-    tmp = 0
+    pay = 0
     for i in range(count+1):
-        tmp += price*i
-    if tmp < money:
+        pay += price*i
+        
+    if pay < money:
         return 0
-    return tmp - money
+    else:
+        return pay - money
