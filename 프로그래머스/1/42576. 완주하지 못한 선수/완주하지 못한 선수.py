@@ -1,7 +1,9 @@
 def solution(participant, completion):
+    answer = ''
     participant.sort()
     completion.sort()
-    for i in range(len(completion)):  # completion 길이에 맞춰 탐색
+    
+    for i in range(len(completion)):
         if participant[i] != completion[i]:
             return participant[i]
-    return participant[-1]  # 끝까지 같으면 마지막 참가자가 미완주자
+    return participant[-1]
