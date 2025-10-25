@@ -4,9 +4,10 @@ def solution(array, commands):
     for command in commands:
         # print(command)
         i,j,k = command
-        sliced = array[i-1:j]
-        sliced.sort()
-        answer.append(sliced[k-1])
+        # sliced = array[i-1:j]
+        # sliced.sort()
+        # answer.append(sliced[k-1])
+        answer.append(list(sorted(array[i-1:j]))[k-1])
             
     return answer
 
