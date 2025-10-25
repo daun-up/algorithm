@@ -1,28 +1,22 @@
 def solution(answers):
     answer = []
-    first = [1, 2, 3, 4, 5]
-    second = [2, 1, 2, 3, 2, 4, 2, 5]
-    third = [3, 3, 1, 1, 2, 2, 4, 4, 5, 5]
-
-    first_cnt = 0
-    second_cnt = 0
-    third_cnt = 0
-
+    
+    first = [1,2,3,4,5]
+    second = [2,1,2,3,2,4,2,5]
+    third = [3,3,1,1,2,2,4,4,5,5]
+    
+    scores = [0,0,0]
+    
     for i in range(len(answers)):
-        if answers[i] == first[i % len(first)]:
-            first_cnt += 1
-        if answers[i] == second[i % len(second)]:
-            second_cnt += 1
-        if answers[i] == third[i % len(third)]:
-            third_cnt += 1
-
-    max_cnt = max(first_cnt, second_cnt, third_cnt)
-
-    if first_cnt == max_cnt:
-        answer.append(1)
-    if second_cnt == max_cnt:
-        answer.append(2)
-    if third_cnt == max_cnt:
-        answer.append(3)
-
+        if answers[i] == first[i % 5]:
+            scores[0] += 1
+        if answers[i] == second[i % 8]:
+            scores[1] += 1
+        if answers[i] == third[i % 10]:
+            scores[2] += 1
+    
+    for idx, num in enumerate(scores): # (인덱스, 점수) 형태
+        if num == max(scores):
+            answer.append(idx+1)
+            
     return answer
