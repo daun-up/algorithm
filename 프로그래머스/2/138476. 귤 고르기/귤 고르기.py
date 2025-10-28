@@ -1,24 +1,24 @@
+from collections import Counter
 def solution(k, tangerine):
-    dic = {}
-
-    # 각 종류별 개수 세기
-    for t in tangerine:
-        if t in dic:
-            dic[t] += 1
-        else:
-            dic[t] = 1
-
-    # 등장 횟수만 추출해서 정렬 (내림차순)
-    counts = sorted(dic.values(), reverse=True)
-
-    total = 0
     answer = 0
-
-    # 가장 많이 나온 것부터 더하다가 k 이상이면 종료
-    for c in counts:
-        total += c
+    total = 0
+    
+    size_count = Counter(tangerine)
+    # Counter({'apple': 3, 'banana': 2, 'orange': 1})
+    # size_cnt.sort(size_cnt.values(), reverse=True)
+    counts = sorted(size_count.values(), reverse=True)
+    
+    for count in counts:
+        total += count
         answer += 1
         if total >= k:
             break
-
+    
+#     for i in size_cnt:
+#         if total > k:
+#             total += i.values()
+#             answer += 1
+#         else:
+#             break
+            
     return answer
