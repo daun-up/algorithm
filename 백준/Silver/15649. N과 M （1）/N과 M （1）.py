@@ -1,17 +1,5 @@
-import sys
-input = sys.stdin.readline
+from itertools import permutations
+n, m = map(int,input().split())
 
-n, m = map(int, input().split())
-res = []
-
-def backtracking():
-    if len(res) == m:	#종료조건
-        print(' '.join(map(str, res)))
-
-    for i in range(1, n+1):
-        if i not in res:
-            res.append(i)
-            backtracking()
-            res.pop()
-
-backtracking()
+for i in permutations(range(1,n+1),m):
+    print(*i)
