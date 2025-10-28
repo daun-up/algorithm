@@ -1,16 +1,16 @@
 def solution(numbers, target):
     answer = 0
-    bfs = [0]
     
-    for n in numbers:
-        tmp = []
-        for b in bfs:
-            tmp.append(b + n)
-            tmp.append(b - n)
-        bfs = tmp
+    def dfs(index, current_sum) :
+        nonlocal answer
+        # 종료 조건
+        if index == len(numbers):
+            if current_sum == target:
+                answer += 1
+            return
         
-    for b in bfs:
-        if b == target:
-            answer += 1
-            
+        dfs(index + 1, current_sum + numbers[index])
+        dfs(index + 1, current_sum - numbers[index])
+    
+    dfs(0,0)
     return answer
