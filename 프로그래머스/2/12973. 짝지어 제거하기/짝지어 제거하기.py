@@ -1,15 +1,15 @@
 def solution(s):
-    answer = -1
+    # answer = -1
     stack = []
-    for i in range(len(s)) :
-        if not stack :
-            stack.append(s[i])
-        else :
-            if s[i] == stack[-1] :
-                stack.pop()
-            else :
-                stack.append(s[i])
-    if stack :
-        return 0
-    else :
+
+    for ch in s:
+        if stack and stack[-1] == ch:
+            stack.pop()
+        else:
+            stack.append(ch)
+        
+        
+    if len(stack) == 0:
         return 1
+    else:
+        return 0
