@@ -1,24 +1,29 @@
-def bfs (s,e) :
-    # 큐, v[], 필요 변수 생성
-    v = [0] * 200001
-    q = []
-    # 초기데이터 삽입, v[] 초기화
-    q.append(s)
-    v[s] = 1
+from collections import deque
+
+n, k = map(int,input().split())
+MAX = 100000
+
+def bfs(start):
+    dist = [-1] * (MAX + 1)
+    
+    q = deque()
+    q.append(start)
+    
+    dist[start] = 0 # 시작점은 방문하고 시작하느 거니까
+    
     while q:
-        c = q.pop(0)
-        if c == e :
-            return v[e] - 1
-        # 3 방향, 범위내 (0~200000), 미방문
-        for n in (c-1, c+1, c*2) :
-            if 0 <= n <= 200000 and v[n] == 0 :
-                q.append(n)
-                v[n] = v[c] + 1
-    # 이곳에 도달할 리는 없겠지만
-    return -1
+        cur = q.popleft()
         
+        if cur == k:
+            return dist[cur]
+        
+        for nxt in (cur + 1, cur - 1, cur * 2):
+            if 0 <= nxt <= MAX and dist[nxt] == -1:
+                # nxt 가 범위 안에 있는지를 먼저 생각해야함
+                dist[nxt] = dist[cur] + 1
+                q.append(nxt)
+    return -1
 
-
-N, K = map(int,input().split())
-ans = bfs(N, K)
-print(ans)
+print(bfs(n))
+        
+    
