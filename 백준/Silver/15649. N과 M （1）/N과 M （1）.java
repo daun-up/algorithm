@@ -11,12 +11,16 @@ public class Main {
     static int[] res;
     static boolean[] visited;
 
+    static StringBuilder sb;
+
     static void choose(int depth) {
         if (depth == M) {
-            for (int i = 0; i < M; i++) {
-                System.out.print(res[i] + " ");
-            }
-            System.out.println();
+            // for (int i = 0; i < M; i++) {
+            // System.out.print(res[i] + " ");
+            // }
+            for (int i : res)
+                sb.append(i).append(" ");
+            sb.append("\n");
             return;
         }
 
@@ -34,6 +38,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
+        sb = new StringBuilder();
 
         N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
@@ -42,6 +47,8 @@ public class Main {
         visited = new boolean[N + 1];
 
         choose(0);
+
+        System.out.print(sb);
     }
 }
 
