@@ -1,73 +1,74 @@
 
 /**
- * 유기농배추
+ * 1012. 유기농 배추
  */
 import java.util.*;
 import java.io.*;
 
 public class Main {
-    static int T, M, N, K;
-    static int[][] map;
-    static boolean[][] visited;
-
+    // 상 하 좌 우
     static int[] dr = { -1, 1, 0, 0 };
     static int[] dc = { 0, 0, -1, 1 };
 
-    static int cnt;
+    static int m, n, k;
+
+    static int[][] map, visited;
+    
+    static boolean inRange(int nr, int nc){
+        return (nr >= 0 && nr < n && nc >= 0 && nc < m);
+    }
 
     static void bfs(int r, int c) {
-        Queue<int[]> q = new LinkedList<>();
-        q.offer(new int[] { r, c });
+        Queue<int[]> queue = new LinkedList<>(); // 좌표 (행, 열) 을 한 번에 넣기 위해
+        queue.offer(new int[] { r, c });
+        visited[r][c] = 1; // 시작점 방문 처리
 
-        while (!q.isEmpty()) {
-            int[] cur = q.poll();
-            int cr = cur[0];
-            int cc = cur[1];
-            visited[cr][cc] = true;
+        while (!queue.isEmpty()) {
+            int[] curr = queue.poll(); // 현재 원소
 
-            for (int i = 0; i < 4; i++) {
-                int nr = cr + dr[i];
-                int nc = cc + dc[i];
+            int currR = curr[0];
+            int currC = curr[1];
 
-                if (nr >= 0 && nr < M && nc >= 0 && nc < N && !visited[nr][nc] && map[nr][nc] == 1) {
-                    visited[nr][nc] = true;
-                    q.offer(new int[] { nr, nc });
+            for (int d = 0; d < 4; d++) {
+                int nr = currR + dr[d];
+                int nc = currC + dc[d];
+
+                // 배추이고, 방문하지 않았고, 범위 내
+                if (inRange(nr, nc) && map[nr][nc] == 1 && visited[nr][nc] == 0) {
+                    visited[nr][nc] = 1;
+                    queue.offer(new int[] { nr, nc });
                 }
             }
         }
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
 
-        T = Integer.parseInt(st.nextToken());
+        int T = Integer.parseInt(br.readLine());
 
         for (int test_case = 1; test_case <= T; test_case++) {
-            st = new StringTokenizer(br.readLine());
-            M = Integer.parseInt(st.nextToken());
-            N = Integer.parseInt(st.nextToken());
-            K = Integer.parseInt(st.nextToken());
-            cnt = 0;
+            StringTokenizer st = new StringTokenizer(br.readLine());
 
-            map = new int[M][N];
-            visited = new boolean[M][N];
-            // for (int r = 0; r < M; r++) {
-            // st = new StringTokenizer(br.readLine());
-            // for (int c = 0; c < N; c++) {
-            // map[r][c] = Integer.parseInt(st.nextToken());
-            // }
-            // }
-            for (int i = 0; i < K; i++) {
+            m = Integer.parseInt(st.nextToken()); // 배추밭 가로길이 (열)
+            n = Integer.parseInt(st.nextToken()); // 세로 길이 (행)
+            k = Integer.parseInt(st.nextToken()); // 배추 개수
+
+            map = new int[n][m];
+            visited = new int[n][m];
+
+            for (int i = 0; i < k; i++) {
                 st = new StringTokenizer(br.readLine());
-                int r = Integer.parseInt(st.nextToken());
-                int c = Integer.parseInt(st.nextToken());
-                map[r][c] = 1;
+                int x = Integer.parseInt(st.nextToken());
+                int y = Integer.parseInt(st.nextToken());
+
+                map[y][x] = 1;
             }
 
-            for (int r = 0; r < M; r++) {
-                for (int c = 0; c < N; c++) {
-                    if (map[r][c] == 1 && !visited[r][c]) { // 배추 있고 방문 안 했을 때
+            int cnt = 0;
+            for (int r = 0; r < n; r++) {
+                for (int c = 0; c < m; c++) {
+                    if(visited[r][c] == 0 && map[r][c] == 1){
                         bfs(r, c);
                         cnt++;
                     }
