@@ -1,11 +1,9 @@
 def solution(arr):
     answer = []
-    
-    for i in arr:
-        if len(answer) == 0 or i != answer[-1]:
-            answer.append(i)
-
-    # for i in range(len(arr)):
-    #     if i == 0 or arr[i-1] != arr[i]:
-    #         answer.append(arr[i])
+    answer.append(arr[0])
+    for i in range(1, len(arr)):
+        if arr[i] != arr[i-1]:
+            answer.append(arr[i])
+        else:
+            continue
     return answer
